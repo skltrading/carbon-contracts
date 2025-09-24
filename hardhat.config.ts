@@ -44,7 +44,7 @@ const {
     TENDERLY_PROJECT = '',
     TENDERLY_TEST_PROJECT = '',
     TENDERLY_USERNAME = '',
-    TENDERLY_NETWORK_NAME = DeploymentNetwork.Mainnet
+    TENDERLY_NETWORK_NAME = DeploymentNetwork.BSC
 }: EnvOptions = process.env as any as EnvOptions;
 
 const mochaOptions = (): MochaOptions => {
@@ -146,6 +146,7 @@ const config: HardhatUserConfig = {
             saveDeployments: true,
             live: true,
             deploy: [`deploy/scripts/${DeploymentNetwork.BSC}`],
+            accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : undefined,
             verify: {
                 etherscan: {
                     apiKey: VERIFY_API_KEY
@@ -639,7 +640,15 @@ const config: HardhatUserConfig = {
                 apiURL: "https://spb.explorer.tac.build/api",
                 browserURL: "https://spb.explorer.tac.build"
               }
-            }
+            },
+            {
+                network: DeploymentNetwork.BSC,
+                chainId: chainIds[DeploymentNetwork.BSC],
+                urls: {
+                  apiURL: "https://api.bscscan.com/api",
+                  browserURL: "https://bscscan.com/"
+                }
+              }
           ]
     },
 

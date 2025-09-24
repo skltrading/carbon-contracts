@@ -23,6 +23,19 @@ const mainnet = (address: string) => {
     };
 };
 
+const bsc = (address: string) => {
+    if (TENDERLY_NETWORK_ID === chainIds[DeploymentNetwork.BSC]) {
+        return {
+            [DeploymentNetwork.BSC]: address,
+            [DeploymentNetwork.Tenderly]: address,
+            [DeploymentNetwork.TenderlyTestnet]: address
+        };
+    }
+    return {
+        [DeploymentNetwork.BSC]: address
+    };
+};
+
 const base = (address: string) => {
     if (TENDERLY_NETWORK_ID === chainIds[DeploymentNetwork.Base]) {
         return {
@@ -232,7 +245,11 @@ const TokenNamedAccounts = {
         ...getAddress(mainnet, '0x6B175474E89094C44Da98b954EedeAC495271d0F'),
         ...getAddress(base, '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb'),
         ...getAddress(arbitrum, '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1'),
-        ...getAddress(mantle, ZERO_ADDRESS)
+        ...getAddress(mantle, ZERO_ADDRESS),
+        ...getAddress(bsc, '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3') // Binance peg dai
+    },
+    wbnb: {
+        ...getAddress(bsc, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c') // binance peg bnb
     },
     weth: {
         ...getAddress(mainnet, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'),
@@ -240,31 +257,36 @@ const TokenNamedAccounts = {
         ...getAddress(arbitrum, '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'),
         ...getAddress(mantle, '0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111'),
         ...getAddress(berachain, '0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590'), // stargate weth
-        ...getAddress(coti, '0x639aCc80569c5FC83c6FBf2319A6Cc38bBfe26d1') // hyperlane weth
+        ...getAddress(coti, '0x639aCc80569c5FC83c6FBf2319A6Cc38bBfe26d1'), // hyperlane weth
+        ...getAddress(bsc, '0x2170ed0880ac9a755fd29b2688956bd959f933f8') // weth
     },
     usdc: {
         ...getAddress(mainnet, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'),
         ...getAddress(base, '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'),
         ...getAddress(arbitrum, '0xaf88d065e77c8cC2239327C5EDb3A432268e5831'),
-        ...getAddress(mantle, '0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9')
+        ...getAddress(mantle, '0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9'),
+        ...getAddress(bsc, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d') // binance peg usdc
     },
     wbtc: {
         ...getAddress(mainnet, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599'),
         ...getAddress(base, ZERO_ADDRESS),
         ...getAddress(arbitrum, '0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f'),
-        ...getAddress(mantle, '0xCAbAE6f6Ea1ecaB08Ad02fE02ce9A44F09aebfA2')
+        ...getAddress(mantle, '0xCAbAE6f6Ea1ecaB08Ad02fE02ce9A44F09aebfA2'),
+        ...getAddress(bsc, '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c') //wbtc
     },
     bnt: {
         ...getAddress(mainnet, '0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C'),
         ...getAddress(base, ZERO_ADDRESS),
         ...getAddress(arbitrum, ZERO_ADDRESS),
-        ...getAddress(mantle, ZERO_ADDRESS)
+        ...getAddress(mantle, ZERO_ADDRESS),
+        ...getAddress(bsc, ZERO_ADDRESS)
     },
     link: {
         ...getAddress(mainnet, '0x514910771AF9Ca656af840dff83E8264EcF986CA'),
         ...getAddress(base, ZERO_ADDRESS),
         ...getAddress(arbitrum, ZERO_ADDRESS),
-        ...getAddress(mantle, ZERO_ADDRESS)
+        ...getAddress(mantle, ZERO_ADDRESS),
+        ...getAddress(bsc, ZERO_ADDRESS)
     }
 };
 
@@ -293,16 +315,16 @@ const VortexNamedAccounts = {
     targetToken: {
         ...getAddress(mainnet, NATIVE_TOKEN_ADDRESS),
         ...getAddress(coti, '0x639aCc80569c5FC83c6FBf2319A6Cc38bBfe26d1'), // weth
-        ...getAddress(tac, NATIVE_TOKEN_ADDRESS) // tac
+        ...getAddress(tac, NATIVE_TOKEN_ADDRESS), // tac
+        ...getAddress(bsc, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d') 
     },
     finalTargetToken: {
         ...getAddress(mainnet, '0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C'),
-        ...getAddress(tac, '0x61D66bC21fED820938021B06e9b2291f3FB91945') // weth
+        ...getAddress(tac, '0x61D66bC21fED820938021B06e9b2291f3FB91945'), // weth
+        ...getAddress(bsc, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d') // usdc
     },
     transferAddress: {
-        ...getAddress(mainnet, '0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C'),
-        ...getAddress(coti, ZERO_ADDRESS),
-        ...getAddress(tac, ZERO_ADDRESS)
+        ...getAddress(bsc, "0xcf9d4c1413b90dC476f5ab81549B2c983391a474")
     }
 };
 
@@ -318,12 +340,16 @@ export const NamedAccounts = {
         ...getAddress(base, 'ledger://0x0f28D58c00F9373C00811E9576eE803B4eF98abe'),
         ...getAddress(arbitrum, 'ledger://0x0f28D58c00F9373C00811E9576eE803B4eF98abe'),
         ...getAddress(mantle, 'ledger://0x5bEBA4D3533a963Dedb270a95ae5f7752fA0Fe22'),
+        ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474'),
         default: 0
     },
-    deployerV2: { ...getAddress(mainnet, '0xdfeE8DC240c6CadC2c7f7f9c257c259914dEa84E') },
-    foundationMultisig: { ...getAddress(mainnet, '0xeBeD45Ca22fcF70AdCcAb7618C51A3Dbb06C8d83') },
-    foundationMultisig2: { ...getAddress(mainnet, '0x0c333d48Af19c2b42577f3C8f4779F0347F8C819') },
-    daoMultisig: { ...getAddress(mainnet, '0x7e3692a6d8c34a762079fa9057aed87be7e67cb8') },
+    deployerV2: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
+    foundationMultisig: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
+    foundationMultisig2: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
+    daoMultisig: { 
+        ...getAddress(mainnet, '0x7e3692a6d8c34a762079fa9057aed87be7e67cb8'),
+        ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474')
+    },
 
     ...TokenNamedAccounts,
     ...TestNamedAccounts,
