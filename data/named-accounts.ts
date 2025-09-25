@@ -324,7 +324,7 @@ const VortexNamedAccounts = {
         ...getAddress(bsc, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d') // usdc
     },
     transferAddress: {
-        ...getAddress(bsc, "0xcf9d4c1413b90dC476f5ab81549B2c983391a474")
+        ...getAddress(bsc, "0x3E0C79B2820781325d35870cBA989bfa5fF522Ab")
     }
 };
 
@@ -340,15 +340,15 @@ export const NamedAccounts = {
         ...getAddress(base, 'ledger://0x0f28D58c00F9373C00811E9576eE803B4eF98abe'),
         ...getAddress(arbitrum, 'ledger://0x0f28D58c00F9373C00811E9576eE803B4eF98abe'),
         ...getAddress(mantle, 'ledger://0x5bEBA4D3533a963Dedb270a95ae5f7752fA0Fe22'),
-        ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474'),
+        ...getAddress(bsc, '0x3E0C79B2820781325d35870cBA989bfa5fF522Ab'),
         default: 0
     },
-    deployerV2: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
-    foundationMultisig: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
-    foundationMultisig2: { ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474') },
+    deployerV2: { ...getAddress(bsc, '0x3E0C79B2820781325d35870cBA989bfa5fF522Ab') },
+    foundationMultisig: { ...getAddress(bsc, '0x3E0C79B2820781325d35870cBA989bfa5fF522Ab') },
+    foundationMultisig2: { ...getAddress(bsc, '0x3E0C79B2820781325d35870cBA989bfa5fF522Ab') },
     daoMultisig: { 
         ...getAddress(mainnet, '0x7e3692a6d8c34a762079fa9057aed87be7e67cb8'),
-        ...getAddress(bsc, '0xcf9d4c1413b90dC476f5ab81549B2c983391a474')
+        ...getAddress(bsc, '0x3E0C79B2820781325d35870cBA989bfa5fF522Ab')
     },
 
     ...TokenNamedAccounts,
